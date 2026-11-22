@@ -1,0 +1,18 @@
+name: EnchantLimit
+version: '${project.version}'
+main: fr.enchantlimit.EnchantLimitPlugin
+api-version: '1.21'
+description: Menu de moderation - enchantements, objets, cooldowns, PvP, equilibrage, monde
+softdepend: [CombatTagPlugin]
+commands:
+  menu:
+    description: Ouvre le menu de moderation
+    aliases: [enchantement, enchantment, enchlimit]
+    permission: enchantlimit.admin
+permissions:
+  enchantlimit.admin:
+    description: Acces a /menu
+    default: op
+  enchantlimit.bypass:
+    description: Ignore les limites, cooldowns, combat tag, regles de monde
+    default: false
