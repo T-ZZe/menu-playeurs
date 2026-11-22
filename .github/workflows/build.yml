@@ -13,12 +13,19 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+          cache: maven
       - name: Compile
         run: |
           POM=$(find . -name pom.xml -not -path "*/target/*" | head -n 1)
           echo "pom.xml trouvé : $POM"
-          mvn -B -f "$POM" package
+          for i in 1 2 3; do
+            mvn -B -f "$POM" package && exit 0
+            echo "Échec, nouvel essai dans 30 s..."
+            sleep 30
+          done
+          exit 1
       - uses: actions/upload-artifact@v4
         with:
           name: MenuPlayer
           path: "**/target/*.jar"
+          
